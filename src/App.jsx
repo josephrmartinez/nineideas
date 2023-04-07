@@ -40,7 +40,14 @@ function App() {
     ideaInputRef.current.focus()
   }
 
-  const ideas = ideaList.map(each => { return <div className='my-4 border-b'>{each}</div>})
+  function checkForSubmit(event) {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      handleAddIdea()
+    }
+  }
+
+  const ideas = ideaList.map(each => { return <><div className='my-4 tracking-wide text-gray-700'>{each}</div><div className='border-b-2'></div></>})
 
   const fillWidth = `${((ideaList.length) / 9) * 100}%`;;
 
@@ -48,10 +55,10 @@ function App() {
   return (
     <div className='w-80 mx-auto my-8'>
       
-      <div className='text-lg font-extrabold'>nine ideas for:</div>
+      <div className='text-xl font-extrabold  text-gray-700'>nine ideas for:</div>
       <div>
         <input
-          className='w-80 my-2 border-b-4 text-lg focus:border-green-700 outline-none'
+          className='w-80 my-2 border-b-4 text-xl font-extrabold text-gray-700 focus:border-green-700 outline-none'
           autoFocus
           value={topic}
           onChange={handleTopicInputChange}
@@ -61,11 +68,13 @@ function App() {
       {addIdeasReady && 
       <>
         <textarea
-          className='w-80 h-28 mt-4 mb-4 border'
+          className='w-80 h-20 mt-4 mb-4 border outline-none'
           value={currentIdea}
-           ref={ideaInputRef}
-          onChange={handleIdeaInputChange}></textarea>  
-      <div className='w-80 h-6 my-4 rounded-full border relative'>  
+          ref={ideaInputRef}
+          autoFocus
+          onChange={handleIdeaInputChange}
+          onKeyDown={checkForSubmit}></textarea>  
+      <div className='w-80 h-3 my-4 rounded-full border relative'>  
         <div className='absolute left-0 top-0 h-full rounded-full'
         style={{width: fillWidth, backgroundColor: "darkgreen"}}></div></div>
         
@@ -76,7 +85,7 @@ function App() {
           <button
             className='w-80 h-12 border rounded-md bg-sky-900 active:bg-sky-800 text-white'
             onClick={handleAddIdea}>add idea</button>}
-        <div>
+        <div className='mt-4'>
           {ideas}
         </div>
       </>
