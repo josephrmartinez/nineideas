@@ -1,27 +1,42 @@
 import { useState, useRef } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+
+import {ReactComponent as RedoIcon} from './assets/redo.svg'
+
+
+import topicsDB from './assets/topicsDB.json'
 
 function App() {
   const [count, setCount] = useState(0)
-  const [topic, setTopic] = useState("")
+  const [topic, setTopic] = useState(generateRandomTopic())
   const [addIdeasReady, setAddIdeasReady] = useState(false)
+  const [isAnimating, setIsAnimating] = useState(false)
   const [currentIdea, setCurrentIdea] = useState("")
   const [ideaList, setIdeaList] = useState([])
   const ideaInputRef = useRef(null)
   
+
+
+  function generateRandomTopic() {
+    const topics = topicsDB.topics;
+    const randomTopic = topics[Math.floor(Math.random() * topics.length)];
+    
+    return randomTopic
+  }
+
+  function handleRedoIconClick() {
+    setIsAnimating(true);
+    setTimeout(() => {
+      setIsAnimating(false);
+      setTopic(generateRandomTopic());
+    }, 500);
+    
+  }
 
   function handleTopicInputChange(event) {
     setTopic(event.target.value)
   }
 
   
-  function checkInput() {
-    if (topic) {
-      setAddIdeasReady(true)
-    } else {setAddIdeasReady(false)}
-  }
 
   function handleIdeaInputChange(event) {
     setCurrentIdea(event.target.value)
@@ -52,21 +67,20 @@ function App() {
   const fillWidth = `${((ideaList.length) / 9) * 100}%`;;
 
   
+
   return (
     <div className='w-80 mx-auto my-8'>
-      
-      <div className='text-xl font-extrabold  text-gray-700'>nine ideas for:</div>
-      <div>
-        <input
-          className='w-80 my-2 border-b-4 text-xl font-extrabold text-gray-700 focus:border-green-700 outline-none'
-          autoFocus
-          value={topic}
-          onChange={handleTopicInputChange}
-          onBlur={checkInput}
-        ></input>
+      <div className='flex flex-row items-center'>
+      <div className='text-xl font-extrabold  text-gray-700 border-b-4 w-fit'>nineideas</div>
+      <RedoIcon onClick={handleRedoIconClick} className={` mx-3 w-5 h-5  ${isAnimating && 'animate-spin'}`} style={{animationDuration: '500ms'}} />
       </div>
-      {addIdeasReady && 
-      <>
+        <div
+          className='w-80 my-2  text-lg text-gray-700'
+        >{topic}</div>
+        
+      
+      
+      
         <textarea
           className='w-80 h-20 mt-4 mb-4 border outline-none'
           value={currentIdea}
@@ -88,9 +102,7 @@ function App() {
         <div className='mt-4'>
           {ideas}
         </div>
-      </>
-        
-      }
+      
     </div>
     
   )
