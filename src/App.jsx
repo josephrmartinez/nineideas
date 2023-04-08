@@ -26,6 +26,7 @@ function App() {
     setTimeout(() => {
       setIsAnimating(false);
       setTopic(generateRandomTopic());
+      setIdeaList([])
     }, 500);
   }  
 
