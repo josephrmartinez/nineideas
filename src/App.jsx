@@ -8,7 +8,6 @@ import topicsDB from './assets/topicsDB.json'
 function App() {
   const [count, setCount] = useState(0)
   const [topic, setTopic] = useState(generateRandomTopic())
-  const [addIdeasReady, setAddIdeasReady] = useState(false)
   const [isAnimating, setIsAnimating] = useState(false)
   const [currentIdea, setCurrentIdea] = useState("")
   const [ideaList, setIdeaList] = useState([])
@@ -19,7 +18,6 @@ function App() {
   function generateRandomTopic() {
     const topics = topicsDB.topics;
     const randomTopic = topics[Math.floor(Math.random() * topics.length)];
-    
     return randomTopic
   }
 
@@ -29,19 +27,11 @@ function App() {
       setIsAnimating(false);
       setTopic(generateRandomTopic());
     }, 500);
-    
-  }
-
-  function handleTopicInputChange(event) {
-    setTopic(event.target.value)
-  }
-
-  
+  }  
 
   function handleIdeaInputChange(event) {
     setCurrentIdea(event.target.value)
   }
-
 
   function handleAddIdea() {
     if (!currentIdea) {
@@ -66,7 +56,6 @@ function App() {
 
   const fillWidth = `${((ideaList.length) / 9) * 100}%`;;
 
-  
 
   return (
     <div className='w-80 mx-auto my-8'>
@@ -74,20 +63,17 @@ function App() {
       <div className='text-xl font-extrabold  text-gray-700 border-b-4 w-fit'>nineideas</div>
       <RedoIcon onClick={handleRedoIconClick} className={` mx-3 w-5 h-5  ${isAnimating && 'animate-spin'}`} style={{animationDuration: '500ms'}} />
       </div>
-        <div
-          className='w-80 my-2  text-lg text-gray-700'
-        >{topic}</div>
-        
-      
-      
-      
+      <div
+        className='w-80 my-2  text-lg text-gray-700'
+      >{topic}</div>
+      {count < 9 &&
         <textarea
           className='w-80 h-20 mt-4 mb-4 border outline-none'
           value={currentIdea}
           ref={ideaInputRef}
           autoFocus
           onChange={handleIdeaInputChange}
-          onKeyDown={checkForSubmit}></textarea>  
+          onKeyDown={checkForSubmit}></textarea>} 
       <div className='w-80 h-3 my-4 rounded-full border relative'>  
         <div className='absolute left-0 top-0 h-full rounded-full'
         style={{width: fillWidth, backgroundColor: "darkgreen"}}></div></div>
