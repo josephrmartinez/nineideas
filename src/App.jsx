@@ -2,6 +2,7 @@ import { useState, useRef } from 'react'
 import {ReactComponent as RedoIcon} from './assets/redo.svg'
 import { ReactComponent as StatsIcon } from './assets/stats.svg'
 import topicsDB from './assets/topicsDB.json'
+import IdeasList from './components/IdeasList'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -56,6 +57,19 @@ function App() {
     setStatsPage(!statsPage)
   }
 
+  function updateIdea(index, idea) {
+    setIdeaList(prevList =>
+      prevList.map((prevIdea, i) => {
+        if (i === index) {
+          return idea;
+        } else {
+          return prevIdea;
+        }
+      })
+    );
+  }
+
+
   const ideas = ideaList.map((each, index) => { return <div key={each}><div className='my-4 tracking-wide text-gray-700'>{each}</div><div className='border-b'></div></div>})
 
   const fillWidth = `${((ideaList.length) / 9) * 100}%`;;
@@ -82,7 +96,7 @@ function App() {
           onKeyDown={checkForSubmit}></textarea>} 
       <div className='w-80 h-3 mb-4 rounded-full border relative'>  
         <div className='absolute left-0 top-0 h-full rounded-full'
-        style={{width: fillWidth, backgroundColor: "darkgreen"}}></div></div>
+        style={{width: fillWidth, background: "linear-gradient(to right, darkgreen, #609d12)"}}></div></div>
         
         {count === 9 ?
           <button
@@ -92,7 +106,7 @@ function App() {
             className='w-80 h-12 border rounded-md bg-sky-900 active:bg-sky-800 text-white'
             onClick={handleAddIdea}>add idea</button>}
         <div className='mt-4 max-h-72 overflow-y-scroll'>
-          {ideas}
+        <IdeasList ideaList={ideaList} updateIdea={updateIdea} />
         </div>
       
       {statsPage && 
@@ -105,10 +119,11 @@ function App() {
           </div>
           
           <div className='text-sm font-bold mt-7 mb-2'>COMPLETED LISTS</div>
-          <div className='max-h-96 overflow-y-scroll'>
+          <div className='max-h-96 overflow-y-auto'>
             <ul className='mx-4 list-disc'>
               <li className='text-sm mb-3'>Ideas for hosting a memorable themed party</li>
               <li className='text-sm mb-3'>Unique ways to display artwork in your home</li>
+        
               <li className='text-sm mb-3'>Creative ways to reduce waste in your daily life</li>
               <li className='text-sm mb-3'>Ideas for using technology to improve mental health</li>
               <li className='text-sm mb-3'>Creative ways to teach children about sustainability</li>
