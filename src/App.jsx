@@ -22,6 +22,7 @@ function App() {
 
   useEffect(() => {
     localStorage.setItem("nineideas", JSON.stringify(nineideasUserData))
+    console.log(nineideasUserData);
   }, [nineideasUserData])
 
   function generateRandomTopic() {
@@ -44,9 +45,6 @@ function App() {
   }
 
   function handleAddIdea() {
-    if (!currentIdea) {
-      return
-    }
     setIdeaList(prevIdeas => {
       return [currentIdea, ...prevIdeas]
     })
@@ -55,20 +53,25 @@ function App() {
     
   }
 
-  useEffect(() => {
-    console.log(topic)
-    console.log(ideaList)
-    console.log(nineideasUserData)
-  }, [ideaList])
+  
 
   useEffect(() => {
-    if (ideaList.length === 9) {
-      setNineideasUserData(prevData => {
-        return [...prevData, { topic: topic, ideaList: ideaList } ]
-      })
-      console.log(nineideasUserData)
-    }
-  }, [ideaList])
+  if (ideaList.length === 9) {
+    setNineideasUserData(prevData => {
+      // Check if an object with the same topic exists
+      const index = prevData.findIndex(obj => obj.topic === topic);
+      if (index !== -1) {
+        // If it exists, update the existing object's ideaList
+        const updatedData = [...prevData];
+        updatedData[index].ideaList = ideaList;
+        return updatedData;
+      } else {
+        // If it doesn't exist, add a new object to the array
+        return [...prevData, { topic: topic, ideaList: ideaList }];
+      }
+    });
+  }
+}, [ideaList]);
 
   function checkForSubmit(event) {
     if (event.key === 'Enter') {
