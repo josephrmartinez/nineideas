@@ -143,10 +143,9 @@ function App() {
       {statsPage && 
         <div className='absolute top-20 w-80 bg-white border p-2' style={{ height: '550px' }}>
         <div className='relative' style={{ height: '550px' }}>
-          <div className='flex flex-row justify-between'>
+          <div className='flex flex-row justify-around'>
               <div className='flex flex-col items-center'><div className='text-xl font-bold'>{nineideasUserData.length}</div><div className='text-sm'>total lists</div></div>
             <div className='flex flex-col items-center'><div className='text-xl font-bold'>2</div><div className='text-sm'>current streak</div></div>
-            <div className='flex flex-col items-center'><div className='text-xl font-bold'>3</div><div className='text-sm'>max streak</div></div>
           </div>
           
           <div className='text-sm font-bold mt-7 mb-2'>COMPLETED LISTS</div>
