@@ -24,7 +24,6 @@ function App() {
     localStorage.setItem("nineideas", JSON.stringify(nineideasUserData))
   }, [nineideasUserData])
 
-
   function generateRandomTopic() {
     const topics = topicsDB.topics;
     const randomTopic = topics[Math.floor(Math.random() * topics.length)];
@@ -55,7 +54,6 @@ function App() {
     ideaInputRef.current.focus()
     
   }
-
 
   useEffect(() => {
     console.log(topic)
@@ -95,8 +93,6 @@ function App() {
     );
   }
 
-
-
   const fillWidth = `${((ideaList.length) / 9) * 100}%`;;
 
   const completedLists = nineideasUserData.map(each => {
@@ -104,7 +100,6 @@ function App() {
       <li className='text-sm mb-3' key={each.topic}>{each.topic}</li>
     )
   })
-
 
   return (
     <div className='w-80 mx-auto my-8'>
@@ -135,7 +130,8 @@ function App() {
           >list completed</button> :
           <button
             className='w-80 h-12 border rounded-md bg-sky-900 active:bg-sky-800 text-white'
-            onClick={handleAddIdea}>add idea</button>}
+          onClick={handleAddIdea}>add idea</button>}
+      
         <div className='mt-4 max-h-72 overflow-y-scroll'>
         <IdeasList ideaList={ideaList} updateIdea={updateIdea} />
         </div>
@@ -147,14 +143,12 @@ function App() {
               <div className='flex flex-col items-center'><div className='text-xl font-bold'>{nineideasUserData.length}</div><div className='text-sm'>total lists</div></div>
             <div className='flex flex-col items-center'><div className='text-xl font-bold'>2</div><div className='text-sm'>current streak</div></div>
           </div>
-          
           <div className='text-sm font-bold mt-7 mb-2'>COMPLETED LISTS</div>
           <div className='max-h-96 overflow-y-auto'>
             <ul className='mx-4 list-disc'>
               {completedLists}  
             </ul>
           </div>
-      
           <div className='text-gray-600 text-sm w-full text-center absolute bottom-5'>site built by <a href='http://www.josephm.dev' target='_blank' className='underline'>josephm.dev</a></div>
           </div>
           </div>
@@ -165,13 +159,3 @@ function App() {
 }
 
 export default App
-
-
-
-// <li className='text-sm mb-3'>Ideas for hosting a memorable themed party</li>
-//               <li className='text-sm mb-3'>Unique ways to display artwork in your home</li>
-        
-//               <li className='text-sm mb-3'>Creative ways to reduce waste in your daily life</li>
-//               <li className='text-sm mb-3'>Ideas for using technology to improve mental health</li>
-//               <li className='text-sm mb-3'>Creative ways to teach children about sustainability</li>
-//               <li className='text-sm mb-3'>Ideas for starting a social impact project in your community</li>
