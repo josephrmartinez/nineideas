@@ -116,8 +116,8 @@ function App() {
       <div className='flex flex-row justify-between items-center'>
         <span className='text-xl font-extrabold  text-gray-700 border-b-4 w-fit'>nineideas</span>
         <div className='flex flex-ro items-center'>
-          <RedoIcon onClick={handleRedoIconClick} className={` mx-3 w-5 h-5  ${isAnimating && 'animate-spin'}`} style={{ animationDuration: '500ms' }} />  
-          <StatsIcon onClick={toggleStatsPage} className='ml-3 w-7 h-7' />
+          <RedoIcon onClick={ statsPage ? toggleStatsPage : handleRedoIconClick } className={` mx-3 w-5 h-5  ${isAnimating && 'animate-spin'}`} style={{ animationDuration: '500ms' }} />  
+          <StatsIcon onClick={toggleStatsPage} className='ml-3 w-7 h-7' style={{stroke: statsPage ? '#ff4400' : '#000000'}} />
         </div>
       </div>
       <div className='w-80 my-6  text-lg text-gray-700'> {topic}</div>

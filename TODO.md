@@ -1,6 +1,6 @@
 <!-- - Fix add list functionality: only ADD NEW list when list is completed. setNineideasUserData should only add a field if the TOPIC is new -->
 
-- Implement onClick functionality for completed lists. Load ideaList data on main page
+<!-- - Implement onClick functionality for completed lists. Load ideaList data on main page -->
 
 - Add date completed field to data object. Only add this on the one time the list hits a nine count
 
