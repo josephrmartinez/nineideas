@@ -14,13 +14,6 @@ function App() {
   const ideaInputRef = useRef(null)
   const [nineideasUserData, setNineideasUserData] = useState(JSON.parse(localStorage.getItem("nineideas")) || [])
   
-//   {
-//   "nineideas": [
-//     { "topic": "", "ideaList": [] },
-//     { "topic": "", "ideaList": [] }  
-//   ]
-// }
-
   useEffect(() => {
     localStorage.setItem("nineideas", JSON.stringify(nineideasUserData))
     console.log(nineideasUserData);
@@ -51,10 +44,7 @@ function App() {
     })
     setCurrentIdea("")
     ideaInputRef.current.focus()
-    
   }
-
-  
 
   useEffect(() => {
   if (ideaList.length === 9) {
@@ -108,7 +98,7 @@ function App() {
 
   const completedLists = nineideasUserData.map(each => {
     return (
-      <li className='text-sm mb-3' key={each.topic} onClick={()=>handleClickCompletedList(each.topic)}>{each.topic}</li>
+      <li className='text-sm mb-5 leading-4' key={each.topic} onClick={()=>handleClickCompletedList(each.topic)}>{each.topic}</li>
     )
   })
 
@@ -117,8 +107,6 @@ function App() {
     currentStreak = countConsecutiveDates(nineideasUserData)
   }
 
-
-  
 
   return (
     <div className='w-80 mx-auto my-8'>
@@ -162,9 +150,9 @@ function App() {
               <div className='flex flex-col items-center'><div className='text-xl font-bold'>{nineideasUserData.length}</div><div className='text-sm'>total lists</div></div>
               <div className='flex flex-col items-center'><div className='text-xl font-bold'>{currentStreak}</div><div className='text-sm'>current streak</div></div>
           </div>
-          <div className='text-sm font-bold mt-7 mb-2'>COMPLETED LISTS</div>
+          <div className='text-sm font-bold mt-7 mb-2 ml-4'>COMPLETED LISTS</div>
           <div className='max-h-96 overflow-y-auto'>
-            <ul className='mx-4 list-disc'>
+            <ul className='mx-4'>
               {completedLists}  
             </ul>
           </div>
