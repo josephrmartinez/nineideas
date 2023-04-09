@@ -3,6 +3,7 @@ import {ReactComponent as RedoIcon} from './assets/redo.svg'
 import { ReactComponent as StatsIcon } from './assets/stats.svg'
 import topicsDB from './assets/topicsDB.json'
 import IdeasList from './components/IdeasList'
+import countConsecutiveDates from './utilities/countConsecutiveDates'
 
 function App() {
   const [topic, setTopic] = useState(generateRandomTopic())
@@ -22,7 +23,7 @@ function App() {
 
   useEffect(() => {
     localStorage.setItem("nineideas", JSON.stringify(nineideasUserData))
-    // console.log(nineideasUserData);
+    console.log(nineideasUserData);
   }, [nineideasUserData])
 
   function generateRandomTopic() {
@@ -67,7 +68,7 @@ function App() {
         return updatedData;
       } else {
         // If it doesn't exist, add a new object to the array
-        return [...prevData, { topic: topic, ideaList: ideaList }];
+        return [...prevData, { topic: topic, ideaList: ideaList, dateAdded: new Date() }];
       }
     });
   }
@@ -111,6 +112,14 @@ function App() {
     )
   })
 
+  let currentStreak = 0;
+  if (nineideasUserData.length > 0) {
+    currentStreak = countConsecutiveDates(nineideasUserData)
+  }
+
+
+  
+
   return (
     <div className='w-80 mx-auto my-8'>
       <div className='flex flex-row justify-between items-center'>
@@ -151,7 +160,7 @@ function App() {
         <div className='relative' style={{ height: '550px' }}>
           <div className='flex flex-row justify-around'>
               <div className='flex flex-col items-center'><div className='text-xl font-bold'>{nineideasUserData.length}</div><div className='text-sm'>total lists</div></div>
-            <div className='flex flex-col items-center'><div className='text-xl font-bold'>2</div><div className='text-sm'>current streak</div></div>
+              <div className='flex flex-col items-center'><div className='text-xl font-bold'>{currentStreak}</div><div className='text-sm'>current streak</div></div>
           </div>
           <div className='text-sm font-bold mt-7 mb-2'>COMPLETED LISTS</div>
           <div className='max-h-96 overflow-y-auto'>
