@@ -22,7 +22,7 @@ function App() {
 
   useEffect(() => {
     localStorage.setItem("nineideas", JSON.stringify(nineideasUserData))
-    console.log(nineideasUserData);
+    // console.log(nineideasUserData);
   }, [nineideasUserData])
 
   function generateRandomTopic() {
@@ -96,11 +96,18 @@ function App() {
     );
   }
 
+  function handleClickCompletedList(topic) {
+    const topicData = nineideasUserData.find(each => each.topic === topic)
+    setTopic(topicData.topic)
+    setIdeaList(topicData.ideaList)
+    toggleStatsPage()
+  }
+
   const fillWidth = `${((ideaList.length) / 9) * 100}%`;;
 
   const completedLists = nineideasUserData.map(each => {
     return (
-      <li className='text-sm mb-3' key={each.topic}>{each.topic}</li>
+      <li className='text-sm mb-3' key={each.topic} onClick={()=>handleClickCompletedList(each.topic)}>{each.topic}</li>
     )
   })
 
