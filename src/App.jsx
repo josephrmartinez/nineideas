@@ -14,16 +14,10 @@ function App() {
   const [statsPage, setStatsPage] = useState(false)
   const ideaInputRef = useRef(null)
   
-  
   useEffect(() => {
     localStorage.setItem("nineideas", JSON.stringify(nineideasUserData))
     console.log(nineideasUserData);
   }, [nineideasUserData])
-
-  
-
-  
-
 
   function generateRandomTopic() {
     const topics = topicsDB.topics;
@@ -123,10 +117,10 @@ function App() {
   return (
     <div className='w-80 mx-auto my-8'>
       <div className='flex flex-row justify-between items-center'>
-        <span className='text-xl font-extrabold  text-gray-700 border-b-4 w-fit'>nineideas</span>
+        <span className='text-xl font-extrabold  text-gray-700 border-b-4 w-fit cursor-default' onClick={ statsPage ? toggleStatsPage : undefined }>nineideas</span>
         <div className='flex flex-ro items-center'>
-          <RedoIcon onClick={ statsPage ? toggleStatsPage : handleRedoIconClick } className={` mx-3 w-5 h-5  ${isAnimating && 'animate-spin'}`} style={{ animationDuration: '500ms' }} />  
-          <StatsIcon onClick={toggleStatsPage} className='ml-3 w-7 h-7' style={{stroke: statsPage ? '#ff4400' : '#000000'}} />
+          <RedoIcon onClick={ statsPage ? toggleStatsPage : handleRedoIconClick } className={` mx-3 w-5 h-5 cursor-pointer  ${isAnimating && 'animate-spin'}`} style={{ animationDuration: '500ms' }} />  
+          <StatsIcon onClick={toggleStatsPage} className='ml-3 w-7 h-7 cursor-pointer' style={{stroke: statsPage ? '#ff4400' : '#000000'}} />
         </div>
       </div>
       <div className='w-80 my-6  text-lg text-gray-700'> {topic}</div>
@@ -158,14 +152,14 @@ function App() {
       {statsPage && 
         <div className='absolute top-20 w-80 bg-white border p-2' style={{ height: '550px' }}>
         <div className='relative' style={{ height: '550px' }}>
-          <div className='flex flex-row justify-around'>
+          <div className='flex flex-row justify-around cursor-default'>
               <div className='flex flex-col items-center'><div className='text-xl font-bold'>{nineideasUserData.length}</div><div className='text-sm'>total lists</div></div>
               <div className='flex flex-col items-center'><div className='text-xl font-bold'>{currentStreak}</div><div className='text-sm'>current streak</div></div>
           </div>
 
             {nineideasUserData.length > 0 ?
               <>
-          <div className='text-sm font-bold mt-7 mb-2 ml-4'>COMPLETED LISTS</div>
+          <div className='text-sm font-bold mt-7 mb-2 ml-4 cursor-default'>COMPLETED LISTS</div>
           <div className='max-h-96 overflow-y-auto'>
             <ul className='mx-4'>
               {completedLists}  
@@ -181,7 +175,7 @@ function App() {
             }
             
 
-          <div className='text-gray-600 text-sm w-full text-center absolute bottom-5'>site built by <a href='http://www.josephm.dev' target='_blank' className='underline'>josephm.dev</a></div>
+          <div className='text-gray-600 text-sm w-full text-center absolute bottom-5 cursor-default'>site built by <a href='http://www.josephm.dev' target='_blank' className='underline'>josephm.dev</a></div>
           </div>
           </div>
       }
