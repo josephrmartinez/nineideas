@@ -6,12 +6,12 @@
 
 <!-- - Implement "current streak" calculation -->
 
-- Implement conditional rendering on info screen. If no completed lists, load intro information
+<!-- - Implement conditional rendering on info screen. If no completed lists, load intro information -->
 
 <!-- - Implement conditional styling: info icon should change color when info page displayed -->
 
 <!-- - Disable redoIcon functionality when info screen is active -->
 
-- Map through userData and topicsListDB to make sure topics are not reused
+<!-- - Map through userData and topicsListDB to make sure topics are not reused -->
 
 - Implement functionality to edit topic?

@@ -110,7 +110,7 @@ function App() {
 
   const completedLists = nineideasUserData.map(each => {
     return (
-      <li className='text-sm mb-5 leading-4' key={each.topic} onClick={()=>handleClickCompletedList(each.topic)}>{each.topic}</li>
+      <li className='text-sm mb-5 leading-4 cursor-pointer text-gray-700' key={each.topic} onClick={()=>handleClickCompletedList(each.topic)}>{each.topic}</li>
     )
   })
 
