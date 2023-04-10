@@ -106,7 +106,7 @@ function App() {
     return (
       <li className='text-sm mb-5 leading-4 cursor-pointer text-gray-700' key={each.topic} onClick={()=>handleClickCompletedList(each.topic)}>{each.topic}</li>
     )
-  })
+  }).reverse()
 
   let currentStreak = 0;
   if (nineideasUserData.length > 0) {
