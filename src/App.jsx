@@ -6,23 +6,35 @@ import IdeasList from './components/IdeasList'
 import countConsecutiveDates from './utilities/countConsecutiveDates'
 
 function App() {
+  const [nineideasUserData, setNineideasUserData] = useState(JSON.parse(localStorage.getItem("nineideas")) || [])
   const [topic, setTopic] = useState(generateRandomTopic())
   const [isAnimating, setIsAnimating] = useState(false)
   const [currentIdea, setCurrentIdea] = useState("")
   const [ideaList, setIdeaList] = useState([])
   const [statsPage, setStatsPage] = useState(false)
   const ideaInputRef = useRef(null)
-  const [nineideasUserData, setNineideasUserData] = useState(JSON.parse(localStorage.getItem("nineideas")) || [])
+  
   
   useEffect(() => {
     localStorage.setItem("nineideas", JSON.stringify(nineideasUserData))
     console.log(nineideasUserData);
   }, [nineideasUserData])
 
+  
+
+  
+
+
   function generateRandomTopic() {
     const topics = topicsDB.topics;
     const randomTopic = topics[Math.floor(Math.random() * topics.length)];
-    return randomTopic
+    const topicFinished = nineideasUserData.find(each => each.topic === randomTopic)
+
+    if (topicFinished) {
+      return generateRandomTopic();
+    } else {
+      return randomTopic
+    }
   }
 
   function handleRedoIconClick() {
