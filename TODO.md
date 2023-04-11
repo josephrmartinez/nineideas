@@ -1,17 +1,11 @@
-<!-- - Fix add list functionality: only ADD NEW list when list is completed. setNineideasUserData should only add a field if the TOPIC is new -->
+- Implement functionality to edit topic
+- Error handling: prevent submit of empty idea.
+- Error handling: prevent submit of same idea already on list
 
-<!-- - Implement onClick functionality for completed lists. Load ideaList data on main page -->
+- Content: update topic database
 
-<!-- - Add date completed field to data object. Only add this on the one time the list hits a nine count -->
-
-<!-- - Implement "current streak" calculation -->
-
-<!-- - Implement conditional rendering on info screen. If no completed lists, load intro information -->
-
-<!-- - Implement conditional styling: info icon should change color when info page displayed -->
-
-<!-- - Disable redoIcon functionality when info screen is active -->
-
-<!-- - Map through userData and topicsListDB to make sure topics are not reused -->
-
-- Implement functionality to edit topic?
+- Animate: turn addIdea button into high relief object. List complete should be totally compressed.
+- Animate: make info box appear from bottom of screen
+- Design: turn progress bar into 3d object.
+- Design: change colors of text throughout app. Dark grays.
+- Design: finalize font choices
