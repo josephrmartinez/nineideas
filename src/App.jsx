@@ -8,11 +8,13 @@ import countConsecutiveDates from './utilities/countConsecutiveDates'
 function App() {
   const [nineideasUserData, setNineideasUserData] = useState(JSON.parse(localStorage.getItem("nineideas")) || [])
   const [topic, setTopic] = useState(generateRandomTopic())
+  const [topicActive, setTopicActive] = useState(false)
   const [isAnimating, setIsAnimating] = useState(false)
   const [currentIdea, setCurrentIdea] = useState("")
   const [ideaList, setIdeaList] = useState([])
   const [statsPage, setStatsPage] = useState(false)
   const ideaInputRef = useRef(null)
+  const topicInputRef = useRef(null)
   
   useEffect(() => {
     localStorage.setItem("nineideas", JSON.stringify(nineideasUserData))
@@ -100,6 +102,13 @@ function App() {
     toggleStatsPage()
   }
 
+  function toggleTopicActive() {
+    setTopicActive(!topicActive)
+    if (topicActive) {
+      ideaInputRef.current.focus()
+    }
+  }
+
   const fillWidth = `${((ideaList.length) / 9) * 100}%`;;
 
   const completedLists = nineideasUserData.map(each => {
@@ -123,7 +132,18 @@ function App() {
           <StatsIcon onClick={toggleStatsPage} className='ml-3 w-7 h-7 cursor-pointer' style={{stroke: statsPage ? '#ff4400' : '#000000'}} />
         </div>
       </div>
-      <div className='w-80 my-6  text-lg text-gray-700'> {topic}</div>
+
+      {topicActive ?
+        <textarea
+          className='w-80 my-6  text-lg text-gray-700'
+          value={topic}
+          ref={topicInputRef}
+          autoFocus
+          onBlur={toggleTopicActive}></textarea>
+        : <div
+          className='w-80 my-6  text-lg text-gray-700'
+          onClick={toggleTopicActive}> {topic}</div>
+      }
       
       {ideaList.length < 9 &&
         <textarea
