@@ -4,6 +4,9 @@ import { ReactComponent as StatsIcon } from './assets/stats.svg'
 import topicsDB from './assets/topicsDB.json'
 import IdeasList from './components/IdeasList'
 import countConsecutiveDates from './utilities/countConsecutiveDates'
+import addIdeaSound from './assets/addIdeaSound.mp3'
+import listCompleteSound from './assets/listCompleteSound.mp3'
+
 
 function App() {
   const [nineideasUserData, setNineideasUserData] = useState(JSON.parse(localStorage.getItem("nineideas")) || [])
@@ -65,8 +68,13 @@ function generateRandomTopic(currentTopic) {
     })
     setCurrentIdea("")
     ideaInputRef.current.focus()
+
+    const audio = new Audio(addIdeaSound);
+    audio.play();
   }
 
+  
+  
   useEffect(() => {
   if (ideaList.length === 9) {
     setNineideasUserData(prevData => {
@@ -78,8 +86,11 @@ function generateRandomTopic(currentTopic) {
         updatedData[index].ideaList = ideaList;
         return updatedData;
       } else {
+        const audio = new Audio(listCompleteSound);
+        audio.play();
         // If it doesn't exist, add a new object to the array
         return [...prevData, { topic: topic, ideaList: ideaList, dateAdded: new Date() }];
+        
       }
     });
   }
@@ -174,7 +185,7 @@ function generateRandomTopic(currentTopic) {
       
       {ideaList.length < 9 &&
         <textarea
-          className='w-80 h-20 mb-4 border outline-none'
+          className='w-80 h-20 mb-3 border outline-none'
           value={currentIdea}
           ref={ideaInputRef}
           autoFocus
