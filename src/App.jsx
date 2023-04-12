@@ -47,6 +47,8 @@ function App() {
   }
 
   function handleAddIdea() {
+    if (currentIdea.trim().length < 3) return;
+    if (ideaList.includes(currentIdea)) return;
     setIdeaList(prevIdeas => {
       return [currentIdea, ...prevIdeas]
     })
@@ -73,6 +75,7 @@ function App() {
 }, [ideaList]);
 
   function checkForSubmit(event) {
+    if (currentIdea.trim().length < 3) return;
     if (event.key === 'Enter') {
       event.preventDefault();
       handleAddIdea()
