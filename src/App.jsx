@@ -79,6 +79,13 @@ function App() {
     }
   }
 
+  function checkForSubmitTopic(event) {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      toggleTopicActive()
+    }
+  }
+
   function toggleStatsPage() {
     setStatsPage(!statsPage)
   }
@@ -107,6 +114,10 @@ function App() {
     if (topicActive) {
       ideaInputRef.current.focus()
     }
+  }
+
+  function handleTopicInputChange(event) {
+    setTopic(event.target.value)
   }
 
   const fillWidth = `${((ideaList.length) / 9) * 100}%`;;
@@ -139,7 +150,9 @@ function App() {
           value={topic}
           ref={topicInputRef}
           autoFocus
-          onBlur={toggleTopicActive}></textarea>
+          onBlur={toggleTopicActive}
+          onChange={handleTopicInputChange}
+          onKeyDown={checkForSubmitTopic}></textarea>
         : <div
           className='w-80 my-6  text-lg text-gray-700'
           onClick={toggleTopicActive}> {topic}</div>
