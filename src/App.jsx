@@ -7,7 +7,7 @@ import countConsecutiveDates from './utilities/countConsecutiveDates'
 
 function App() {
   const [nineideasUserData, setNineideasUserData] = useState(JSON.parse(localStorage.getItem("nineideas")) || [])
-  const [topic, setTopic] = useState(generateRandomTopic())
+  const [topic, setTopic] = useState(() => generateRandomTopic())
   const [topicActive, setTopicActive] = useState(false)
   const [isAnimating, setIsAnimating] = useState(false)
   const [currentIdea, setCurrentIdea] = useState("")
@@ -21,23 +21,34 @@ function App() {
     console.log(nineideasUserData);
   }, [nineideasUserData])
 
-  function generateRandomTopic() {
-    const topics = topicsDB.topics;
-    const randomTopic = topics[Math.floor(Math.random() * topics.length)];
-    const topicFinished = nineideasUserData.find(each => each.topic === randomTopic)
+  // function generateRandomTopic() {
+  //   const topics = topicsDB.topics;
+  //   const randomTopic = topics[Math.floor(Math.random() * topics.length)];
+  //   const topicFinished = nineideasUserData.find(each => each.topic === randomTopic)
 
-    if (topicFinished) {
-      return generateRandomTopic();
-    } else {
-      return randomTopic
-    }
-  }
+  //   if (topicFinished) {
+  //     return generateRandomTopic();
+  //   }
+
+  //   return randomTopic
+  // }
+
+function generateRandomTopic(currentTopic) {
+  const topics = topicsDB.topics;
+  let randomTopic = null;
+
+  do {
+    randomTopic = topics[Math.floor(Math.random() * topics.length)];
+  } while (randomTopic === currentTopic || nineideasUserData.find(each => each.topic === randomTopic));
+
+  return randomTopic;
+}
 
   function handleRedoIconClick() {
     setIsAnimating(true);
     setTimeout(() => {
       setIsAnimating(false);
-      setTopic(generateRandomTopic());
+      setTopic(currentTopic => generateRandomTopic(currentTopic));
       setIdeaList([])
     }, 500);
   }  
@@ -149,7 +160,7 @@ function App() {
 
       {topicActive ?
         <textarea
-          className='w-80 my-6  text-lg text-gray-700'
+          className='w-80 my-6  text-lg text-gray-600'
           value={topic}
           ref={topicInputRef}
           autoFocus
@@ -157,7 +168,7 @@ function App() {
           onChange={handleTopicInputChange}
           onKeyDown={checkForSubmitTopic}></textarea>
         : <div
-          className='w-80 my-6  text-lg text-gray-700'
+          className='w-80 my-6  text-lg text-gray-600'
           onClick={toggleTopicActive}> {topic}</div>
       }
       
@@ -174,12 +185,23 @@ function App() {
         style={{width: fillWidth, background: "linear-gradient(to right, darkgreen, #609d12)"}}></div></div>
         
         {ideaList.length  === 9 ?
-          <button
-          className='w-80 h-12 border rounded-md bg-sky-900 cursor-default text-white'
-          >list completed</button> :
-          <button
-            className='w-80 h-12 border rounded-md bg-sky-900 active:bg-sky-800 text-white'
-          onClick={handleAddIdea}>add idea</button>}
+          <button class="pushable complete">
+            <span class="shadow"></span>
+            <span class="edge"></span>
+            <span class="front">
+              list complete
+            </span>
+        </button>  :
+        
+          <button class="pushable" onClick={handleAddIdea}>
+            <span class="shadow"></span>
+            <span class="edge"></span>
+            <span class="front">
+              add idea
+            </span>
+        </button> 
+        
+        }
       
         <div className='mt-4 max-h-72 overflow-y-scroll'>
         <IdeasList ideaList={ideaList} updateIdea={updateIdea} />
@@ -189,8 +211,8 @@ function App() {
         <div className='absolute top-20 w-80 bg-white border p-2' style={{ height: '550px' }}>
         <div className='relative' style={{ height: '550px' }}>
           <div className='flex flex-row justify-around cursor-default'>
-              <div className='flex flex-col items-center'><div className='text-xl font-bold'>{nineideasUserData.length}</div><div className='text-sm'>total lists</div></div>
-              <div className='flex flex-col items-center'><div className='text-xl font-bold'>{currentStreak}</div><div className='text-sm'>current streak</div></div>
+              <div className='flex flex-col items-center'><div className='text-xl my-2 font-bold'>{nineideasUserData.length}</div><div className='text-xs text-gray-700'>TOTAL LISTS</div></div>
+              <div className='flex flex-col items-center'><div className='text-xl my-2 font-bold'>{currentStreak}</div><div className='text-xs text-gray-700'>CURRENT STREAK</div></div>
           </div>
 
             {nineideasUserData.length > 0 ?
@@ -203,8 +225,10 @@ function App() {
           </div>
               </>
               :
-              <div className=' w-full text-center mt-20'>
-                <span>Write nine ideas every day.</span>
+              <div className=' w-full text-center text-sm mt-20 text-gray-600'>
+                <div>Write nine ideas every day.</div>
+          
+                <div className='mt-3'>Only completed lists are saved.</div>
                 
               </div>
               
