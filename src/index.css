@@ -11,7 +11,9 @@
     outline-offset: 4px;
     transition: filter 250ms;
     width: 100%;
+    -webkit-tap-highlight-color: transparent;
 }
+
 
 .shadow {
     position: absolute;
@@ -55,7 +57,7 @@ hsl(340deg 100% 16%) 100%); */
     border-radius: 12px;
     font-size: 1.25rem;
     color: white;
-    background: hsl(202deg 80% 32%);
+    background: hsl(202deg 80% 28%);
     will-change: transform;
     transform: translateY(-4px);
     transition:
