@@ -13,10 +13,16 @@ export default function IdeasList({ ideaList, updateIdea }) {
     setEditedIdea(event.target.value);
   };
 
-  const handleInputBlur = () => {
+  function handleInputBlur() {
     setEditIndex(-1);
     updateIdea(editIndex, editedIdea)
   };
+
+  function checkSubmitIdea(event) {
+    if (event.key === 'Enter' && editedIdea.trim().length > 3) {
+      handleInputBlur()
+    }
+  }
 
   const ideas = ideaList.map((each, index) => {
     const initialRows = Math.ceil(each.length / 40)
@@ -27,7 +33,8 @@ export default function IdeasList({ ideaList, updateIdea }) {
         <textarea
           className="my-4 tracking-wide w-full p-0 text-gray-700"
           value={editedIdea}
-          onChange={handleInputChange}
+            onChange={handleInputChange}
+            onKeyDown={checkSubmitIdea}
           onBlur={handleInputBlur}
           rows={initialRows}
         />
