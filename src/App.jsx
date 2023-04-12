@@ -153,8 +153,8 @@ function generateRandomTopic(currentTopic) {
       <div className='flex flex-row justify-between items-center'>
         <span className='text-xl font-extrabold  text-gray-700 border-b-4 w-fit cursor-default' onClick={ statsPage ? toggleStatsPage : undefined }>nineideas</span>
         <div className='flex flex-ro items-center'>
-          <RedoIcon onClick={ statsPage ? toggleStatsPage : handleRedoIconClick } className={` mx-3 w-5 h-5 cursor-pointer  ${isAnimating && 'animate-spin'}`} style={{ animationDuration: '500ms' }} />  
-          <StatsIcon onClick={toggleStatsPage} className='ml-3 w-7 h-7 cursor-pointer' style={{stroke: statsPage ? '#ff4400' : '#000000'}} />
+          <RedoIcon onClick={ statsPage ? toggleStatsPage : handleRedoIconClick } className={`bg-transparent mx-3 w-5 h-5 cursor-pointer  ${isAnimating && 'animate-spin'}`} style={{ animationDuration: '500ms' }} />  
+          <StatsIcon onClick={toggleStatsPage} className='bg-transparent ml-3 w-7 h-7 cursor-pointer' style={{stroke: statsPage ? '#ff4400' : '#000000'}} />
         </div>
       </div>
 
@@ -180,9 +180,11 @@ function generateRandomTopic(currentTopic) {
           autoFocus
           onChange={handleIdeaInputChange}
           onKeyDown={checkForSubmit}></textarea>} 
-      <div className='w-80 h-3 mb-4 rounded-full border relative'>  
-        <div className='absolute left-0 top-0 h-full rounded-full'
-        style={{width: fillWidth, background: "linear-gradient(to right, darkgreen, #609d12)"}}></div></div>
+      <div className='w-80 h-4 mb-4 rounded-full border relative'>  
+        <div className='absolute left-0 top-0 h-full rounded-full shadow-lg'
+          style={{ width: fillWidth, background: "linear-gradient(to bottom, #6cb00e, #005c14)", transition: "width 0.4s cubic-bezier(0.3, .15, 0.35, 1)" }}>
+        </div>
+      </div>
         
         {ideaList.length  === 9 ?
           <button class="pushable complete">
