@@ -87,7 +87,12 @@ function generateRandomTopic(currentTopic) {
         return updatedData;
       } else {
         const audio = new Audio(listCompleteSound);
+        
+        setTimeout(() => {
         audio.play();
+        }, 700);
+        
+        
         // If it doesn't exist, add a new object to the array
         return [...prevData, { topic: topic, ideaList: ideaList, dateAdded: new Date() }];
         
