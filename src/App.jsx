@@ -24,17 +24,6 @@ function App() {
     console.log(nineideasUserData);
   }, [nineideasUserData])
 
-  // function generateRandomTopic() {
-  //   const topics = topicsDB.topics;
-  //   const randomTopic = topics[Math.floor(Math.random() * topics.length)];
-  //   const topicFinished = nineideasUserData.find(each => each.topic === randomTopic)
-
-  //   if (topicFinished) {
-  //     return generateRandomTopic();
-  //   }
-
-  //   return randomTopic
-  // }
 
 function generateRandomTopic(currentTopic) {
   const topics = topicsDB.topics;
@@ -154,7 +143,7 @@ function generateRandomTopic(currentTopic) {
 
   const completedLists = nineideasUserData.map(each => {
     return (
-      <li className='text-sm mb-5 leading-4 cursor-pointer text-gray-700' key={each.topic} onClick={()=>handleClickCompletedList(each.topic)}>{each.topic}</li>
+      <li className='text-sm mb-5 leading-4 cursor-pointer text-gray-600' key={each.topic} onClick={()=>handleClickCompletedList(each.topic)}>{each.topic}</li>
     )
   }).reverse()
 
@@ -167,7 +156,9 @@ function generateRandomTopic(currentTopic) {
   return (
     <div className='w-80 mx-auto my-8'>
       <div className='flex flex-row justify-between items-center'>
-        <span className='text-xl font-extrabold  text-gray-700 border-b-4 w-fit cursor-default' onClick={ statsPage ? toggleStatsPage : undefined }>nineideas</span>
+        <span
+          className='text-xl font-semibold text-gray-800 border-b-4 w-fit cursor-default'
+          onClick={statsPage ? toggleStatsPage : undefined}>nineideas</span>
         <div className='flex flex-ro items-center'>
           <RedoIcon onClick={ statsPage ? toggleStatsPage : handleRedoIconClick } className={`bg-transparent mx-3 w-5 h-5 cursor-pointer  ${isAnimating && 'animate-spin'}`} style={{ animationDuration: '500ms' }} />  
           <StatsIcon onClick={toggleStatsPage} className='bg-transparent ml-3 w-7 h-7 cursor-pointer' style={{stroke: statsPage ? '#ff4400' : '#000000'}} />
@@ -184,7 +175,7 @@ function generateRandomTopic(currentTopic) {
           onChange={handleTopicInputChange}
           onKeyDown={checkForSubmitTopic}></textarea>
         : <div
-          className='w-80 my-6  text-lg text-gray-600'
+          className='w-80 my-6 text-lg text-gray-600'
           onClick={toggleTopicActive}> {topic}</div>
       }
       
