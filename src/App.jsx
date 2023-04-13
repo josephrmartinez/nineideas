@@ -160,8 +160,8 @@ function generateRandomTopic(currentTopic) {
           className='text-xl font-semibold text-gray-800 border-b-4 w-fit cursor-default'
           onClick={statsPage ? toggleStatsPage : undefined}>nineideas</span>
         <div className='flex flex-ro items-center'>
-          <RedoIcon onClick={ statsPage ? toggleStatsPage : handleRedoIconClick } className={`bg-transparent mx-3 w-5 h-5 cursor-pointer  ${isAnimating && 'animate-spin'}`} style={{ animationDuration: '500ms' }} />  
-          <StatsIcon onClick={toggleStatsPage} className='bg-transparent ml-3 w-7 h-7 cursor-pointer' style={{stroke: statsPage ? '#ff4400' : '#000000'}} />
+          <RedoIcon onClick={ statsPage ? toggleStatsPage : handleRedoIconClick } className={`mx-3 w-5 h-5 cursor-pointer  ${isAnimating && 'animate-spin'}`} style={{ animationDuration: '500ms', webkit-tap-highlight-color: transparent }} />  
+          <StatsIcon onClick={toggleStatsPage} className='ml-3 w-7 h-7 cursor-pointer' style={{stroke: statsPage ? '#ff4400' : '#000000'}} />
         </div>
       </div>
 
