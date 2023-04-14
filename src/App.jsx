@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
-import {ReactComponent as RedoIcon} from './assets/redo.svg'
+import {ReactComponent as RedoIconC} from './assets/redoc.svg'
 import { ReactComponent as StatsIcon } from './assets/stats.svg'
 import topicsDB from './assets/topicsDB.json'
 import IdeasList from './components/IdeasList'
@@ -166,7 +166,7 @@ function generateRandomTopic(currentTopic) {
           className='text-xl font-semibold text-gray-800 border-b-4 w-fit cursor-default'
           onClick={statsPage ? toggleStatsPage : undefined}>nineideas</span>
         <div className='flex flex-row items-center'>
-          <RedoIcon onClick={ statsPage ? toggleStatsPage : handleRedoIconClick } className={`mx-3 w-5 h-5 cursor-pointer  ${isAnimating && 'animate-spin'}`} style={{ animationDuration: '500ms' }} />  
+          <RedoIconC onClick={ statsPage ? toggleStatsPage : handleRedoIconClick } className={`mx-3 w-5 h-5 cursor-pointer  ${isAnimating && 'animate-spin'}`} style={{ animationDuration: '500ms' }} />  
           <StatsIcon onClick={toggleStatsPage} className='ml-3 w-7 h-7 cursor-pointer' style={{stroke: statsPage ? '#ff4400' : '#000000'}} />
         </div>
       </div>
