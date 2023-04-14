@@ -1,3 +1,6 @@
+- Add log in and sign up buttons
+- Add auth and account creation functionality
+- Add sign in functionality
+
 - Animate: make info box appear from bottom of screen
-- Design: change colors of text throughout app. Dark grays.
-- Design: finalize font choices
+- Design: add dark mode option

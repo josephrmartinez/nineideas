@@ -16,6 +16,7 @@ function App() {
   const [currentIdea, setCurrentIdea] = useState("")
   const [ideaList, setIdeaList] = useState([])
   const [statsPage, setStatsPage] = useState(false)
+  const [buttonActive, setButtonActive] = useState(false)
   const ideaInputRef = useRef(null)
   const topicInputRef = useRef(null)
 
@@ -52,9 +53,12 @@ function generateRandomTopic(currentTopic) {
   }
 
   function handleAddIdea() {
+    setButtonActive(true)
     handleAddIdeaAudio.currentTime = 0;
     handleAddIdeaAudio.play();
-
+    setTimeout(() => {
+        setButtonActive(false);
+      }, 100);
     if (currentIdea.trim().length < 3) return;
     if (ideaList.includes(currentIdea)) return;
     setIdeaList(prevIdeas => {
@@ -204,7 +208,7 @@ function generateRandomTopic(currentTopic) {
             </span>
         </button>  :
         
-          <button class="pushable" onClick={handleAddIdea}>
+        <button class={`pushable ${buttonActive ? 'active' : ''}`} onClick={handleAddIdea}>
             <span class="shadow"></span>
             <span class="edge"></span>
             <span class="front">

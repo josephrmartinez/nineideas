@@ -47,13 +47,6 @@
             hsl(200deg 80% 16%) 100%);
 }
 
-/* 345deg 100% 47% */
-
-/* hsl(340deg 100% 16%) 0%,
-hsl(340deg 100% 32%) 8%,
-hsl(340deg 100% 32%) 92%,
-hsl(340deg 100% 16%) 100%); */
-
 .front {
     display: block;
     position: relative;
@@ -68,31 +61,17 @@ hsl(340deg 100% 16%) 100%); */
         transform 600ms cubic-bezier(.3, .7, .4, 1);
 }
 
-/* .pushable:hover {
-    filter: brightness(102%);
-}
 
-.pushable:hover .front {
-    transform: translateY(-5px);
-    transition:
-        transform 250ms cubic-bezier(.3, .7, .4, 1.5);
-} */
-
-.pushable:active .front {
+.pushable.active .front {
     transform: translateY(-2px);
     transition: transform 34ms;
 }
 
-/* .pushable:hover .shadow {
-    transform: translateY(3px);
-    transition:
-        transform 250ms cubic-bezier(.3, .7, .4, 1.5);
-} */
-
-.pushable:active .shadow {
+.pushable.active .shadow {
     transform: translateY(1px);
     transition: transform 34ms;
 }
+
 
 .pushable:focus:not(:focus-visible) {
     outline: none;
