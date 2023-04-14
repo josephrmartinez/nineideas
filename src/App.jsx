@@ -20,7 +20,9 @@ function App() {
   const ideaInputRef = useRef(null)
   const topicInputRef = useRef(null)
 
-  const handleAddIdeaAudio = new Audio(addIdeaSound);
+  const handleAddIdeaAudio = new Audio();
+  handleAddIdeaAudio.preload = 'auto';
+  handleAddIdeaAudio.src = addIdeaSound;
   
   useEffect(() => {
     localStorage.setItem("nineideas", JSON.stringify(nineideasUserData))
@@ -53,9 +55,11 @@ function generateRandomTopic(currentTopic) {
   }
 
   function handleAddIdea() {
-    setButtonActive(true)
     handleAddIdeaAudio.currentTime = 0;
     handleAddIdeaAudio.play();
+
+    setButtonActive(true)
+    
     setTimeout(() => {
         setButtonActive(false);
       }, 100);
