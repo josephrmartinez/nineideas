@@ -18,6 +18,8 @@ function App() {
   const [statsPage, setStatsPage] = useState(false)
   const ideaInputRef = useRef(null)
   const topicInputRef = useRef(null)
+
+  const handleAddIdeaAudio = new Audio(addIdeaSound);
   
   useEffect(() => {
     localStorage.setItem("nineideas", JSON.stringify(nineideasUserData))
@@ -50,6 +52,9 @@ function generateRandomTopic(currentTopic) {
   }
 
   function handleAddIdea() {
+    handleAddIdeaAudio.currentTime = 0;
+    handleAddIdeaAudio.play();
+
     if (currentIdea.trim().length < 3) return;
     if (ideaList.includes(currentIdea)) return;
     setIdeaList(prevIdeas => {
@@ -57,9 +62,6 @@ function generateRandomTopic(currentTopic) {
     })
     setCurrentIdea("")
     ideaInputRef.current.focus()
-
-    const audio = new Audio(addIdeaSound);
-    audio.play();
   }
 
   
